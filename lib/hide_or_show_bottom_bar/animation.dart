@@ -1,84 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MaterialApp(
+  home: HiddenBottomAppBar(),
+));
 
-class MyApp extends StatelessWidget {
+class HiddenBottomAppBar extends StatefulWidget {
+  const HiddenBottomAppBar({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: BottomNavBarHandler(),
-    );
-  }
+  HiddenBottomAppBarState createState() => HiddenBottomAppBarState();
 }
 
-class BottomNavBarHandler extends StatefulWidget {
-  @override
-  _BottomNavBarHandlerState createState() => _BottomNavBarHandlerState();
-}
-
-class _BottomNavBarHandlerState extends State<BottomNavBarHandler> {
-  late ScrollController _scrollController;
+class HiddenBottomAppBarState extends State<HiddenBottomAppBar> {
+  late ScrollController _hideBottomAppBarScrollController;
   bool _isVisible = true;
-  double _scrollThreshold = 46.0;
 
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
-    _scrollController.addListener(() {
-      final scrollPosition = _scrollController.position.pixels;
-      print('Scroll position (Y-axis): $scrollPosition'); // Print Y-axis position
-      setState(() {
-        _isVisible = scrollPosition <= _scrollThreshold;
-      });
-    });
+    _hideBottomAppBarScrollController = ScrollController();
+    _hideBottomAppBarScrollController.addListener(_scrollListener);
   }
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    _hideBottomAppBarScrollController.removeListener(_scrollListener);
     super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_hideBottomAppBarScrollController.position.userScrollDirection ==
+        ScrollDirection.reverse) {
+      setState(() {
+        _isVisible = false;
+      });
+    } else if (_hideBottomAppBarScrollController.position.userScrollDirection ==
+        ScrollDirection.forward) {
+      setState(() {
+        _isVisible = true;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Animate Bottom NavBar on Scroll'),
-      ),
-      body: ListView.builder(
-        controller: _scrollController,
-        itemCount: 50,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text('Item $index'),
-          );
-        },
-      ),
-      bottomNavigationBar: AnimatedContainer(
-        duration: Duration(milliseconds: 500),
-        transform: Matrix4.translationValues(0.0, _isVisible ? 0.0 : _scrollThreshold, 0.0),
-        child: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Search',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
-            ),
-          ],
-          onTap: (index) {
-            // Handle navigation
-            // Add your navigation logic here
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: ListView.builder(
+          controller: _hideBottomAppBarScrollController,
+          itemCount: 100,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text('List Item $index'),
+              leading: Icon(Icons.image),
+            );
           },
+        ),
+        bottomNavigationBar: AnimatedContainer(
+          duration: Duration(milliseconds: 300),
+          height: _isVisible ? 60.0 : 0.0,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            color: _isVisible ? Colors.blue : Colors.transparent,
+            child: Center(
+              child: Text("Bottom AppBar"),
+            ),
+          ),
         ),
       ),
     );
