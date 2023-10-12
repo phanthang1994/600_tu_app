@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
+// https://www.geeksforgeeks.org/flutter-hidden-bottom-appbar/
 void main() => runApp(MaterialApp(
   home: HiddenBottomAppBar(),
 ));
@@ -13,34 +13,28 @@ class HiddenBottomAppBar extends StatefulWidget {
 }
 
 class HiddenBottomAppBarState extends State<HiddenBottomAppBar> {
-  late ScrollController _hideBottomAppBarScrollController;
-  bool _isVisible = true;
+  late ScrollController _HideBottomAppBarController;
+  var _isVisible;
 
   @override
-  void initState() {
+  initState() {
     super.initState();
-    _hideBottomAppBarScrollController = ScrollController();
-    _hideBottomAppBarScrollController.addListener(_scrollListener);
-  }
-
-  @override
-  void dispose() {
-    _hideBottomAppBarScrollController.removeListener(_scrollListener);
-    super.dispose();
-  }
-
-  void _scrollListener() {
-    if (_hideBottomAppBarScrollController.position.userScrollDirection ==
-        ScrollDirection.reverse) {
-      setState(() {
-        _isVisible = false;
-      });
-    } else if (_hideBottomAppBarScrollController.position.userScrollDirection ==
-        ScrollDirection.forward) {
-      setState(() {
-        _isVisible = true;
-      });
-    }
+    _isVisible = true;
+    _HideBottomAppBarController = ScrollController();
+    _HideBottomAppBarController.addListener(() {
+      if (_HideBottomAppBarController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        setState(() {
+          _isVisible = false;
+        });
+      }
+      if (_HideBottomAppBarController.position.userScrollDirection ==
+          ScrollDirection.forward) {
+        setState(() {
+          _isVisible = true;
+        });
+      }
+    });
   }
 
   @override
@@ -49,7 +43,7 @@ class HiddenBottomAppBarState extends State<HiddenBottomAppBar> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: ListView.builder(
-          controller: _hideBottomAppBarScrollController,
+          controller: _HideBottomAppBarController,
           itemCount: 100,
           itemBuilder: (context, index) {
             return ListTile(
@@ -61,12 +55,26 @@ class HiddenBottomAppBarState extends State<HiddenBottomAppBar> {
         bottomNavigationBar: AnimatedContainer(
           duration: Duration(milliseconds: 300),
           height: _isVisible ? 60.0 : 0.0,
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            color: _isVisible ? Colors.blue : Colors.transparent,
-            child: Center(
-              child: Text("Bottom AppBar"),
+          child: _isVisible
+              ? AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+            height: _isVisible ? 60.0 : 0.0,
+            child: _isVisible
+                ? Container(
+              width: MediaQuery.of(context).size.width,
+              color: Colors.blue,
+              child: Center(
+                child: Text("Bottom AppBar"),
+              ),
+            )
+                : Container(
+              color: Colors.white,
+              width: MediaQuery.of(context).size.width,
             ),
+          )
+              : Container(
+            color: Colors.transparent,
+            width: MediaQuery.of(context).size.width,
           ),
         ),
       ),
