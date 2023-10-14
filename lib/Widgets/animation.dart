@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../Constant/constants.dart';
 import '../Models/nav_models.dart';
 import 'MenuItem.dart';
-
+// https://stackoverflow.com/questions/50353640/hide-bottom-navigation-bar-on-scroll-in-flutter
 
 class AnimatedNavBar extends StatefulWidget {
   const AnimatedNavBar({
