@@ -15,10 +15,6 @@ class NavBarHandler extends StatefulWidget {
 class _NavBarHandlerState extends State<NavBarHandler>
     with SingleTickerProviderStateMixin {
 
-  late List<BottomNavigationBarItem> _bottomList = <BottomNavigationBarItem>[];
-
-
-
   late Animation<double> fadeAnimation;
   late AnimationController _controller;
   @override
@@ -32,12 +28,6 @@ class _NavBarHandlerState extends State<NavBarHandler>
       CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn),
     );
 
-    _bottomList = List.generate(
-        buildBody.length,
-            (index) => BottomNavigationBarItem(
-          icon: Icon(menuItemList[index].iconData),
-          label: menuItemList[index].text,
-        )).toList();
     _controller.forward();
   }
 

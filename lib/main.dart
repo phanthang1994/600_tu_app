@@ -22,10 +22,8 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.indigo,
         ),
         routes: {
-          // This route needs to be registered, Because
-          //  we are pushing this on the main Navigator Stack on line 754 (isRootNavigator:true)
-          ProfileEdit.route: (context) => const ProfileEdit(),
-        },
-        home: const NavBarHandler());
+          '/': (context) => const NavBarHandler(),
+        }
+        );
   }
 }

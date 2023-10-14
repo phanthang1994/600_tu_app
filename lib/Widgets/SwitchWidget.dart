@@ -1,29 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../provider.dart';
 import 'TotalTimeWidger.dart';
 
-
-final timerStateProvider = StateProvider.autoDispose<bool>((ref) {
-  return false;
-});
-void main() => runApp(const SwitchApp());
-
-class SwitchApp extends StatelessWidget {
-  const SwitchApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Switch Sample')),
-        body: Center(
-          child: SwitchExample(),
-        ),
-      ),
-    );
-  }
-}
 
 class SwitchExample extends StatefulWidget {
   const SwitchExample({super.key});
