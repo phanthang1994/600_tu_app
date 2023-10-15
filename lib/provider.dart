@@ -8,3 +8,6 @@ final timerStateProvider = StateProvider.autoDispose<bool>((ref) {
 final counterStateProvider = StateProvider<int>((ref) {
   return 1;
 });
+final indexBottomNavbarProvider = StateProvider<int>((ref) {
+  return 0;
+});
