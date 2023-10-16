@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../Constant/bottom_bodies.dart';
 import '../provider.dart';
 import '../show_hide_bottom_nav/bottom_and_name_route.dart';
 void main() {
@@ -20,17 +21,6 @@ class MainScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bodies = [
-      const Center(
-        child: Text('Hello From Home Screen'),
-      ),
-      const Center(
-        child: Text('Hello From Favorite Screen'),
-      ),
-      const Center(
-        child: Text('Hello From Settings Screen'),
-      ),
-    ];
     final indexBottomNavbar = ref.watch(indexBottomNavbarProvider);
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
