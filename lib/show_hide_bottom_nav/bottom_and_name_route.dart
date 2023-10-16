@@ -17,10 +17,10 @@
     const FirstScreen({Key? key}) : super(key: key);
 
     @override
-    _FirstScreenState createState() => _FirstScreenState();
+    FirstScreenState createState() => FirstScreenState();
   }
 
-  class _FirstScreenState extends State<FirstScreen> {
+  class FirstScreenState extends State<FirstScreen> {
     int _currentIndex = 0;
 
     final List<Widget> _screens = [
@@ -77,7 +77,7 @@
 
     @override
     Widget build(BuildContext context) {
-      return Center(
+      return const Center(
         child: Text('Home Screen'),
       );
     }
@@ -88,7 +88,7 @@
 
     @override
     Widget build(BuildContext context) {
-      return Center(
+      return const Center(
         child: Text('Business Screen'),
       );
     }
@@ -99,14 +99,14 @@
 
     @override
     Widget build(BuildContext context) {
-      return Center(
+      return const Center(
         child: Text('School Screen'),
       );
     }
   }
 
   class SecondScreen extends StatelessWidget {
-    const SecondScreen({Key? key});
+    const SecondScreen({super.key});
 
     @override
     Widget build(BuildContext context) {

@@ -113,48 +113,6 @@ class _HomeState extends State<Home> {
                     "A Greet welcome to you all.",
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
-                  trailing: PopUpMen(
-                    menuList: const [
-                      PopupMenuItem(
-                        child: ListTile(
-                          leading: Icon(
-                            CupertinoIcons.person,
-                          ),
-                          title: Text("My Profile"),
-                        ),
-                      ),
-                      PopupMenuItem(
-                        child: ListTile(
-                          leading: Icon(
-                            CupertinoIcons.bag,
-                          ),
-                          title: Text("My Bag"),
-                        ),
-                      ),
-                      PopupMenuDivider(),
-                      PopupMenuItem(
-                        child: Text("Settings"),
-                      ),
-                      PopupMenuItem(
-                        child: Text("About Us"),
-                      ),
-                      PopupMenuDivider(),
-                      PopupMenuItem(
-                        child: ListTile(
-                          leading: Icon(
-                            Icons.logout,
-                          ),
-                          title: Text("Log Out"),
-                        ),
-                      ),
-                    ],
-                    icon: CircleAvatar(
-                      backgroundImage: const NetworkImage(
-                        'https://images.unsplash.com/photo-1644982647869-e1337f992828?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80',
-                      ),
-                      child: Container(),
-                    ),
-                  ),
                 ),
               ),
               SizedBox(
@@ -237,7 +195,7 @@ class _HomeState extends State<Home> {
           curve: Curves.easeInOutSine,
           height: showBtmAppBr ? 70 : 0,
           child: BottomAppBar(
-            shape: CircularNotchedRectangle(),
+            shape: const CircularNotchedRectangle(),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
