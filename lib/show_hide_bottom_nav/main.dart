@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 // https://www.youtube.com/watch?v=k2zaHqNZEh4
 void main() {
   runApp(const MyApp());
@@ -77,159 +78,155 @@ class _HomeState extends State<Home> {
   }
 
   bool showBtmAppBr = true;
-
+  int currentPageIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          controller: _scrollController,
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 36.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: ListTile(
-                  onTap: () {},
-                  selected: true,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(16.0),
-                    ),
+    return Consumer(
+      builder: (_, WidgetRef ref, __) {
+        return Scaffold(
+          body: SafeArea(
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 36.0,
                   ),
-                  selectedTileColor: Colors.indigoAccent.shade100,
-                  title: Text(
-                    "Welcome Back",
-                    style: Theme.of(context).textTheme.titleMedium!.merge(
+                  Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: ListTile(
+                      onTap: () {},
+                      selected: true,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(16.0),
+                        ),
+                      ),
+                      selectedTileColor: Colors.indigoAccent.shade100,
+                      title: Text(
+                        "Welcome Back",
+                        style: Theme.of(context).textTheme.titleMedium!.merge(
                           const TextStyle(
                             fontWeight: FontWeight.w700,
                             fontSize: 18.0,
                           ),
                         ),
-                  ),
-                  subtitle: Text(
-                    "A Greet welcome to you all.",
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 200,
-                child: PageView.builder(
-                  controller: pageController,
-                  onPageChanged: (index) {
-                    pageNo = index;
-                    setState(() {});
-                  },
-                  itemBuilder: (_, index) {
-                    return AnimatedBuilder(
-                      animation: pageController,
-                      builder: (ctx, child) {
-                        return child!;
-                      },
-                      child: GestureDetector(
-                        onTap: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content:
-                                  Text("Hello you tapped at ${index + 1} "),
-                            ),
-                          );
-                        },
-                        onPanDown: (d) {
-                          carasouelTmer?.cancel();
-                          carasouelTmer = null;
-                        },
-                        onPanCancel: () {
-                          carasouelTmer = getTimer();
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.only(
-                              right: 8, left: 8, top: 24, bottom: 12),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(24.0),
-                            color: Colors.amberAccent,
-                          ),
-                        ),
                       ),
-                    );
-                  },
-                  itemCount: 5,
-                ),
-              ),
-              const SizedBox(
-                height: 12.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  5,
-                  (index) => GestureDetector(
-                    child: Container(
-                      margin: const EdgeInsets.all(2.0),
-                      child: Icon(
-                        Icons.circle,
-                        size: 12.0,
-                        color: pageNo == index
-                            ? Colors.indigoAccent
-                            : Colors.grey.shade300,
+                      subtitle: Text(
+                        "A Greet welcome to you all.",
+                        style: Theme.of(context).textTheme.titleSmall,
                       ),
                     ),
                   ),
-                ),
+                  SizedBox(
+                    height: 200,
+                    child: PageView.builder(
+                      controller: pageController,
+                      onPageChanged: (index) {
+                        pageNo = index;
+                        setState(() {});
+                      },
+                      itemBuilder: (_, index) {
+                        return AnimatedBuilder(
+                          animation: pageController,
+                          builder: (ctx, child) {
+                            return child!;
+                          },
+                          child: GestureDetector(
+                            onTap: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content:
+                                  Text("Hello you tapped at ${index + 1} "),
+                                ),
+                              );
+                            },
+                            onPanDown: (d) {
+                              carasouelTmer?.cancel();
+                              carasouelTmer = null;
+                            },
+                            onPanCancel: () {
+                              carasouelTmer = getTimer();
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.only(
+                                  right: 8, left: 8, top: 24, bottom: 12),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(24.0),
+                                color: Colors.amberAccent,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      itemCount: 5,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 12.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      5,
+                          (index) => GestureDetector(
+                        child: Container(
+                          margin: const EdgeInsets.all(2.0),
+                          child: Icon(
+                            Icons.circle,
+                            size: 12.0,
+                            color: pageNo == index
+                                ? Colors.indigoAccent
+                                : Colors.grey.shade300,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(24.0),
+                    child: GridB(),
+                  ),
+                ],
               ),
-              const Padding(
-                padding: EdgeInsets.all(24.0),
-                child: GridB(),
-              ),
-            ],
-          ),
-        ),
-      ),
-        bottomNavigationBar: AnimatedContainer(
-          duration: const Duration(
-            milliseconds: 800,
-          ),
-          curve: Curves.easeInOutSine,
-          height: showBtmAppBr ? 70 : 0,
-          child: BottomAppBar(
-            shape: const CircularNotchedRectangle(),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.home_outlined,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    CupertinoIcons.heart,
-                  ),
-                ),
-                const SizedBox(
-                  width: 50,
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    CupertinoIcons.cart,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    CupertinoIcons.bell,
-                  ),
-                ),
-              ],
             ),
           ),
-        ),
+          bottomNavigationBar: AnimatedContainer(
+            duration: const Duration(
+              milliseconds: 800,
+            ),
+            curve: Curves.easeInOutSine,
+            height: showBtmAppBr ? 70 : 0,
+            child:  NavigationBar(
+              onDestinationSelected: (int index) {
+                setState(() {
+                  currentPageIndex = index;
+                });
+              },
+              indicatorColor: Colors.amber[800],
+              selectedIndex: currentPageIndex,
+              destinations: const <Widget>[
+                NavigationDestination(
+                  selectedIcon: Icon(Icons.home),
+                  icon: Icon(Icons.home_outlined),
+                  label: 'Home',
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.business),
+                  label: 'Business',
+                ),
+                NavigationDestination(
+                  selectedIcon: Icon(Icons.school),
+                  icon: Icon(Icons.school_outlined),
+                  label: 'School',
+                ),
+              ],
+
+            ),
+
+          ),
+        );
+      },
     );
   }
 }
