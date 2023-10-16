@@ -4,9 +4,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../Constant/bottom_bodies.dart';
+import '../bottom_works_with_riverpod/home_screen.dart';
+import '../provider.dart';
+import 'bottom_and_name_route.dart';
 // https://www.youtube.com/watch?v=k2zaHqNZEh4
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ProviderScope(child: MaterialApp(
+      title: 'Named Routes Demo',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const MainScreen(),
+        '/second': (context) => const SecondScreen(),
+      },
+    )),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -79,117 +93,24 @@ class _HomeState extends State<Home> {
 
   bool showBtmAppBr = true;
   int currentPageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (_, WidgetRef ref, __) {
+        final indexBottomNavbar = ref.watch(indexBottomNavbarProvider);
         return Scaffold(
           body: SafeArea(
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 36.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: ListTile(
-                      onTap: () {},
-                      selected: true,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(16.0),
-                        ),
-                      ),
-                      selectedTileColor: Colors.indigoAccent.shade100,
-                      title: Text(
-                        "Welcome Back",
-                        style: Theme.of(context).textTheme.titleMedium!.merge(
-                          const TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ),
-                      subtitle: Text(
-                        "A Greet welcome to you all.",
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 200,
-                    child: PageView.builder(
-                      controller: pageController,
-                      onPageChanged: (index) {
-                        pageNo = index;
-                        setState(() {});
-                      },
-                      itemBuilder: (_, index) {
-                        return AnimatedBuilder(
-                          animation: pageController,
-                          builder: (ctx, child) {
-                            return child!;
-                          },
-                          child: GestureDetector(
-                            onTap: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content:
-                                  Text("Hello you tapped at ${index + 1} "),
-                                ),
-                              );
-                            },
-                            onPanDown: (d) {
-                              carasouelTmer?.cancel();
-                              carasouelTmer = null;
-                            },
-                            onPanCancel: () {
-                              carasouelTmer = getTimer();
-                            },
-                            child: Container(
-                              margin: const EdgeInsets.only(
-                                  right: 8, left: 8, top: 24, bottom: 12),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(24.0),
-                                color: Colors.amberAccent,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                      itemCount: 5,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      5,
-                          (index) => GestureDetector(
-                        child: Container(
-                          margin: const EdgeInsets.all(2.0),
-                          child: Icon(
-                            Icons.circle,
-                            size: 12.0,
-                            color: pageNo == index
-                                ? Colors.indigoAccent
-                                : Colors.grey.shade300,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.all(24.0),
-                    child: GridB(),
-                  ),
-                ],
+            child: indexBottomNavbar == 0
+                ? Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/second');  // Navigate to SecondScreen
+                },
+                child: const Text('Launch SecondScreen'),
               ),
-            ),
+            )
+                : bodies[indexBottomNavbar],
           ),
           bottomNavigationBar: AnimatedContainer(
             duration: const Duration(
@@ -197,33 +118,35 @@ class _HomeState extends State<Home> {
             ),
             curve: Curves.easeInOutSine,
             height: showBtmAppBr ? 70 : 0,
-            child:  NavigationBar(
-              onDestinationSelected: (int index) {
-                setState(() {
-                  currentPageIndex = index;
-                });
-              },
-              indicatorColor: Colors.amber[800],
-              selectedIndex: currentPageIndex,
-              destinations: const <Widget>[
-                NavigationDestination(
-                  selectedIcon: Icon(Icons.home),
-                  icon: Icon(Icons.home_outlined),
+            child: BottomNavigationBar(
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
                   label: 'Home',
+                  backgroundColor: Colors.red,
                 ),
-                NavigationDestination(
+                BottomNavigationBarItem(
                   icon: Icon(Icons.business),
                   label: 'Business',
+                  backgroundColor: Colors.green,
                 ),
-                NavigationDestination(
-                  selectedIcon: Icon(Icons.school),
-                  icon: Icon(Icons.school_outlined),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.school),
                   label: 'School',
+                  backgroundColor: Colors.purple,
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.settings),
+                  label: 'Settings',
+                  backgroundColor: Colors.pink,
                 ),
               ],
-
+              currentIndex: indexBottomNavbar,
+              selectedItemColor: Colors.amber[800],
+              onTap: (value) {
+                ref.read(indexBottomNavbarProvider.notifier).update((state) => value);
+              },
             ),
-
           ),
         );
       },
