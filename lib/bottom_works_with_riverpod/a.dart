@@ -16,13 +16,17 @@ class MainScreen extends StatefulWidget {
 }
 class _MainScreenState extends State<MainScreen> {
   bool visible = true;
-  int currentIndex = 0;
-
+  int _selectedIndex = 0;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
-        index: currentIndex,
+        index: _selectedIndex,
         children: [
           Container(
             child: Center(
@@ -41,18 +45,13 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
       bottomNavigationBar: AnimatedContainer(
-        duration: Duration(milliseconds: 1000),
+        duration: const Duration(milliseconds: 1000),
         curve: Curves.fastLinearToSlowEaseIn,
         height: visible ? kBottomNavigationBarHeight : 0,
         child: Wrap(
           children: [
             BottomNavigationBar(
-              onTap: (index) {
-                setState(() {
-                  currentIndex = index;
-                });
-              },
-              items: const[
+              items: const <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home),
                   label: 'Home',
@@ -74,6 +73,9 @@ class _MainScreenState extends State<MainScreen> {
                   backgroundColor: Colors.pink,
                 ),
               ],
+              currentIndex: _selectedIndex,
+              selectedItemColor: Colors.amber[800],
+              onTap: _onItemTapped,
             ),
           ],
         ),
