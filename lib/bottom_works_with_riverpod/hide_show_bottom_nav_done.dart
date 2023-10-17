@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../Constant/constants.dart';
 import '../provider.dart';
 import '../show_hide_bottom_nav/bottom_and_name_route.dart';
 // https://github.com/Bytx-youtube/scrolltohide/blob/main/lib/mainscreen.dart
@@ -54,35 +55,7 @@ class MainScreen extends ConsumerWidget {
             height: visible ? kBottomNavigationBarHeight : 0,
             child: Wrap(
               children: [
-                BottomNavigationBar(
-                  items: const <BottomNavigationBarItem>[
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.home),
-                      label: 'Home',
-                      backgroundColor: Colors.red,
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.business),
-                      label: 'Business',
-                      backgroundColor: Colors.green,
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.school),
-                      label: 'School',
-                      backgroundColor: Colors.purple,
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.settings),
-                      label: 'Settings',
-                      backgroundColor: Colors.pink,
-                    ),
-                  ],
-                  currentIndex: indexBottomNavbar,
-                  selectedItemColor: Colors.amber[800],
-                  onTap: (value) {
-                    ref.read(indexBottomNavbarProvider.notifier).update((state) => value);
-                  },
-                ),
+                buildBottomNavigationBar(ref),
               ],
             ),
           ),
