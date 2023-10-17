@@ -1,6 +1,5 @@
-// Copyright 2013 The Flutter Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
+
+//https://codewithandrea.com/articles/flutter-navigate-without-context-gorouter-riverpod/
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -63,10 +62,7 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Home Screen')),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () =>   ref.read(goRouterProvider).go('/details'),
-          child: const Text('Go to the Details screen'),
-        ),
+        child: goTo(ref) ,
       ),
     );
   }
@@ -82,11 +78,23 @@ class DetailsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Details Screen')),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () =>  ref.read(goRouterProvider).pop(),
-          child: const Text('Go back to the Home screen'),
-        ),
+        child: backTo(ref),
       ),
     );
   }
+}
+
+Widget goTo(ref){
+  return ElevatedButton(
+    onPressed: () =>  ref.read(goRouterProvider).go('/details'),
+    child: const Text('Go to the Details screen'),
+  );
+}
+
+
+Widget backTo(ref){
+  return ElevatedButton(
+    onPressed: () =>  ref.read(goRouterProvider).pop(),
+    child: const Text('Go back to the Home screen'),
+  );
 }
