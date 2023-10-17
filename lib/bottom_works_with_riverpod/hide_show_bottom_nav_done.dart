@@ -3,12 +3,20 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../provider.dart';
+import '../show_hide_bottom_nav/bottom_and_name_route.dart';
 // https://github.com/Bytx-youtube/scrolltohide/blob/main/lib/mainscreen.dart
 //https://www.youtube.com/watch?v=FJrtlsMNS-0
 void main() {
-  runApp(const ProviderScope(child: MaterialApp(
-    home: MainScreen(),
-  ))) ;
+  runApp(
+    ProviderScope(child: MaterialApp(
+      title: 'Named Routes Demo',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const MainScreen(),
+        '/second': (context) => const SecondScreen(),
+      },
+    )),
+  );
 }
 
 class MainScreen extends StatefulWidget {
@@ -27,21 +35,30 @@ class _MainScreenState extends State<MainScreen> {
         // 3. use ref.watch() to get the value of the provider
         final indexBottomNavbar = ref.watch(indexBottomNavbarProvider);
         return Scaffold(
-          body: IndexedStack(
-            index: indexBottomNavbar,
-            children: [
-              const Center(
-                child: Text("Fav"),
+            body: indexBottomNavbar == 0
+                ? Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/second');  // Navigate to SecondScreen
+                },
+                child: const Text('Launch SecondScreen'),
               ),
-              HomeScreen(
-                hideNavigation: hideNav,
-                showNavigation: showNav,
-              ),
-              const Center(
-                child: Text("Profile"),
-              ),
-            ],
-          ),
+            )
+                : IndexedStack(
+              index: indexBottomNavbar,
+              children: [
+                const Center(
+                  child: Text("Fav"),
+                ),
+                HomeScreen(
+                  hideNavigation: hideNav,
+                  showNavigation: showNav,
+                ),
+                const Center(
+                  child: Text("Profile"),
+                ),
+              ],
+            ),
           bottomNavigationBar: AnimatedContainer(
             duration: const Duration(milliseconds: 1000),
             curve: Curves.fastLinearToSlowEaseIn,
