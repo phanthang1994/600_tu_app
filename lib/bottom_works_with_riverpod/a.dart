@@ -28,19 +28,15 @@ class _MainScreenState extends State<MainScreen> {
       body: IndexedStack(
         index: _selectedIndex,
         children: [
-          Container(
-            child: Center(
-              child: Text("Fav"),
-            ),
+          const Center(
+            child: Text("Fav"),
           ),
           HomeScreen(
             hideNavigation: hideNav,
             showNavigation: showNav,
           ),
-          Container(
-            child: Center(
-              child: Text("Profile"),
-            ),
+          const Center(
+            child: Text("Profile"),
           ),
         ],
       ),
