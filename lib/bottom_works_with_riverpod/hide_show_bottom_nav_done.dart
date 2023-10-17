@@ -35,20 +35,16 @@ class _MainScreenState extends State<MainScreen> {
         // 3. use ref.watch() to get the value of the provider
         final indexBottomNavbar = ref.watch(indexBottomNavbarProvider);
         return Scaffold(
-            body: indexBottomNavbar == 0
-                ? Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/second');  // Navigate to SecondScreen
-                },
-                child: const Text('Launch SecondScreen'),
-              ),
-            )
-                : IndexedStack(
+            body: IndexedStack(
               index: indexBottomNavbar,
               children: [
-                const Center(
-                  child: Text("Fav"),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/second');  // Navigate to SecondScreen
+                    },
+                    child: const Text('Launch SecondScreen'),
+                  ),
                 ),
                 HomeScreen(
                   hideNavigation: hideNav,
