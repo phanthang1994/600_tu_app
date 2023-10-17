@@ -66,7 +66,7 @@ class _MainScreenState extends State<MainScreen> {
                     BottomNavigationBarItem(
                       icon: Icon(Icons.home),
                       label: 'Home',
-                      backgroundColor: Colors.red,
+                      // backgroundColor: Colors.red,
                     ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons.business),
@@ -76,12 +76,12 @@ class _MainScreenState extends State<MainScreen> {
                     BottomNavigationBarItem(
                       icon: Icon(Icons.school),
                       label: 'School',
-                      backgroundColor: Colors.purple,
+                      // backgroundColor: Colors.purple,
                     ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons.settings),
                       label: 'Settings',
-                      backgroundColor: Colors.pink,
+                      // backgroundColor: Colors.pink,
                     ),
                   ],
                   currentIndex: indexBottomNavbar,
@@ -156,76 +156,74 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView(
-        controller: scrollController,
-        children: [
-          Container(
-            color: Colors.red,
-            height: 270,
-          ),
-          Container(
-            color: Colors.blue,
-            height: 200,
-          ),
-          Container(
-            color: Colors.purple,
-            height: 200,
-          ),
-          Container(
-            color: Colors.green,
-            height: 280,
-          ),
-          Container(
-            color: Colors.red,
-            height: 270,
-          ),
-          Container(
-            color: Colors.blue,
-            height: 200,
-          ),
-          Container(
-            color: Colors.purple,
-            height: 200,
-          ),
-          Container(
-            color: Colors.green,
-            height: 280,
-          ),
-          Container(
-            color: Colors.red,
-            height: 270,
-          ),
-          Container(
-            color: Colors.blue,
-            height: 200,
-          ),
-          Container(
-            color: Colors.purple,
-            height: 200,
-          ),
-          Container(
-            color: Colors.green,
-            height: 280,
-          ),
-          Container(
-            color: Colors.red,
-            height: 270,
-          ),
-          Container(
-            color: Colors.blue,
-            height: 200,
-          ),
-          Container(
-            color: Colors.purple,
-            height: 200,
-          ),
-          Container(
-            color: Colors.green,
-            height: 280,
-          ),
-        ],
-      ),
+    return ListView(
+      controller: scrollController,
+      children: [
+        Container(
+          color: Colors.red,
+          height: 270,
+        ),
+        Container(
+          color: Colors.blue,
+          height: 200,
+        ),
+        Container(
+          color: Colors.purple,
+          height: 200,
+        ),
+        Container(
+          color: Colors.green,
+          height: 280,
+        ),
+        Container(
+          color: Colors.red,
+          height: 270,
+        ),
+        Container(
+          color: Colors.blue,
+          height: 200,
+        ),
+        Container(
+          color: Colors.purple,
+          height: 200,
+        ),
+        Container(
+          color: Colors.green,
+          height: 280,
+        ),
+        Container(
+          color: Colors.red,
+          height: 270,
+        ),
+        Container(
+          color: Colors.blue,
+          height: 200,
+        ),
+        Container(
+          color: Colors.purple,
+          height: 200,
+        ),
+        Container(
+          color: Colors.green,
+          height: 280,
+        ),
+        Container(
+          color: Colors.red,
+          height: 270,
+        ),
+        Container(
+          color: Colors.blue,
+          height: 200,
+        ),
+        Container(
+          color: Colors.purple,
+          height: 200,
+        ),
+        Container(
+          color: Colors.green,
+          height: 280,
+        ),
+      ],
     );
   }
 }
