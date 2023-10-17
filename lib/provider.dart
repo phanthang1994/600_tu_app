@@ -11,3 +11,4 @@ final counterStateProvider = StateProvider<int>((ref) {
 final indexBottomNavbarProvider = StateProvider<int>((ref) {
   return 0;
 });
+final visibilityProvider = StateProvider<bool>((ref) => true);

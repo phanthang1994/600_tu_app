@@ -19,22 +19,15 @@ void main() {
   );
 }
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+class MainScreen extends ConsumerWidget {
+  const MainScreen({super.key});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-class _MainScreenState extends State<MainScreen> {
-  bool visible = true;
   @override
-  Widget build(BuildContext context) {
-    return Consumer(
-      // 2. specify the builder and obtain a WidgetRef
-      builder: (_, WidgetRef ref, __) {
-        // 3. use ref.watch() to get the value of the provider
-        final indexBottomNavbar = ref.watch(indexBottomNavbarProvider);
-        return Scaffold(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final indexBottomNavbar = ref.watch(indexBottomNavbarProvider);
+    final visible = ref.watch(visibilityProvider);
+    return Scaffold(
             body: IndexedStack(
               index: indexBottomNavbar,
               children: [
@@ -46,12 +39,12 @@ class _MainScreenState extends State<MainScreen> {
                     child: const Text('Launch SecondScreen'),
                   ),
                 ),
-                HomeScreen(
-                  hideNavigation: hideNav,
-                  showNavigation: showNav,
-                ),
+                const HomeScreen(),
                 const Center(
                   child: Text("Profile"),
+                ),
+                const Center(
+                  child: Text("Setting"),
                 ),
               ],
             ),
@@ -66,7 +59,7 @@ class _MainScreenState extends State<MainScreen> {
                     BottomNavigationBarItem(
                       icon: Icon(Icons.home),
                       label: 'Home',
-                      // backgroundColor: Colors.red,
+                      backgroundColor: Colors.red,
                     ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons.business),
@@ -76,12 +69,12 @@ class _MainScreenState extends State<MainScreen> {
                     BottomNavigationBarItem(
                       icon: Icon(Icons.school),
                       label: 'School',
-                      // backgroundColor: Colors.purple,
+                      backgroundColor: Colors.purple,
                     ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons.settings),
                       label: 'Settings',
-                      // backgroundColor: Colors.pink,
+                      backgroundColor: Colors.pink,
                     ),
                   ],
                   currentIndex: indexBottomNavbar,
@@ -94,38 +87,20 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
         );
-      },
-    );
-  }
-
-  void hideNav() {
-    setState(() {
-      visible = false;
-    });
-  }
-
-  void showNav() {
-    setState(() {
-      visible = true;
-    });
   }
 
 }
 
-class HomeScreen extends StatefulWidget {
-  final VoidCallback showNavigation;
-  final VoidCallback hideNavigation;
+class HomeScreen extends ConsumerStatefulWidget  {
 
   const HomeScreen({Key? key,
-    required this.showNavigation,
-    required this.hideNavigation
   }) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   ScrollController scrollController = ScrollController();
 
   @override
@@ -134,9 +109,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     scrollController.addListener(() {
       if(scrollController.position.userScrollDirection == ScrollDirection.forward) {
-        widget.showNavigation();
+        ref.read(visibilityProvider.notifier).state = true;
       } else {
-        widget.hideNavigation();
+        ref.read(visibilityProvider.notifier).state = false;
       }
     });
   }
@@ -147,9 +122,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     scrollController.removeListener(() {
       if(scrollController.position.userScrollDirection == ScrollDirection.forward) {
-        widget.showNavigation();
+        ref.read(visibilityProvider.notifier).state = true;
       } else {
-        widget.hideNavigation();
+        ref.read(visibilityProvider.notifier).state = false;
       }
     });
   }

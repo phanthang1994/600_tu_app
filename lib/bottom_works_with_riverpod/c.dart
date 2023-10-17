@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final visibilityProvider = StateProvider<bool>((ref) => true);
+import '../provider.dart';
+
 
 void main() {
   runApp(
-    ProviderScope(
+    const ProviderScope(
       child: MaterialApp(
         home: MainScreen(),
       ),
@@ -14,6 +15,8 @@ void main() {
 }
 
 class MainScreen extends StatelessWidget {
+  const MainScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Consumer(
@@ -22,7 +25,7 @@ class MainScreen extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: Text('Main Screen'),
+            title: const Text('Main Screen'),
           ),
           body: Center(
             child: Column(
@@ -30,19 +33,19 @@ class MainScreen extends StatelessWidget {
               children: [
                 Visibility(
                   visible: visible,
-                  child: Text('Navigation is visible'),
+                  child: const Text('Navigation is visible'),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     ref.read(visibilityProvider.notifier).state = false;
                   },
-                  child: Text('Hide Navigation'),
+                  child: const Text('Hide Navigation'),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     ref.read(visibilityProvider.notifier).state = true;
                   },
-                  child: Text('Show Navigation'),
+                  child: const Text('Show Navigation'),
                 ),
               ],
             ),
