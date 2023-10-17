@@ -3,9 +3,9 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../Constant/constants.dart';
+import '../Screens/second_screen.dart';
 import '../provider.dart';
-import '../show_hide_bottom_nav/bottom_and_name_route.dart';
-// https://github.com/Bytx-youtube/scrolltohide/blob/main/lib/mainscreen.dart
+
 //https://www.youtube.com/watch?v=FJrtlsMNS-0
 void main() {
   runApp(

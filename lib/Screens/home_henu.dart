@@ -3,8 +3,8 @@ import 'package:flutter/rendering.dart';
 
 
 import '../Constant/constants.dart';
-import 'FeedDetailWidget.dart';
-import 'HomeFeed.dart';
+import 'feed_detail_widget.dart';
+import 'home_feed.dart';
 class HomeMenu extends StatelessWidget {
   const HomeMenu({Key? key}) : super(key: key);
 

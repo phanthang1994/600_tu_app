@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../Constant/bottom_bodies.dart';
+import '../Screens/second_screen.dart';
 import '../provider.dart';
-import '../show_hide_bottom_nav/bottom_and_name_route.dart';
+
 void main() {
   runApp(
     ProviderScope(child: MaterialApp(

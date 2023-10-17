@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../Screens/HomeMenu.dart';
-import '../Screens/ProductsMenu.dart';
-import '../Screens/ProfileMenu.dart';
+import '../Screens/home_henu.dart';
+import '../Screens/products_menu.dart';
+import '../Screens/profile_menu.dart';
 import '../Widgets/MenuItem.dart';
 import '../provider.dart';
 
