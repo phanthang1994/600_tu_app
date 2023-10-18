@@ -3,7 +3,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+
+import '../provider.dart';
 
 /// This sample app shows an app with two screens.
 ///
@@ -13,30 +14,10 @@ import 'package:go_router/go_router.dart';
 /// The buttons use context.go() to navigate to each destination. On mobile
 /// devices, each destination is deep-linkable and on the web, can be navigated
 /// to using the address bar.
-final goRouterProvider = Provider<GoRouter>((ref) {
-  return _router;
-});
+
 void main() => runApp(const ProviderScope(child: MyApp()));
 
 /// The route configuration.
-final GoRouter _router = GoRouter(
-  routes: <RouteBase>[
-    GoRoute(
-      path: '/',
-      builder: (BuildContext context, GoRouterState state) {
-        return const HomeScreen();
-      },
-      routes: <RouteBase>[
-        GoRoute(
-          path: 'details',
-          builder: (BuildContext context, GoRouterState state) {
-            return const DetailsScreen();
-          },
-        ),
-      ],
-    ),
-  ],
-);
 
 /// The main app.
 class MyApp extends ConsumerWidget  {

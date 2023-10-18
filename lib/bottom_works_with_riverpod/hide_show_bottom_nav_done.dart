@@ -7,18 +7,18 @@ import '../Screens/second_screen.dart';
 import '../provider.dart';
 
 //https://www.youtube.com/watch?v=FJrtlsMNS-0
-void main() {
-  runApp(
-    ProviderScope(child: MaterialApp(
-      title: 'Named Routes Demo',
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const MainScreen(),
-        '/second': (context) => const SecondScreen(),
-      },
-    )),
-  );
-}
+// void main() {
+//   runApp(
+//     ProviderScope(child: MaterialApp(
+//       title: 'Named Routes Demo',
+//       initialRoute: '/',
+//       routes: {
+//         '/': (context) => const MainScreen(),
+//         '/second': (context) => const SecondScreen(),
+//       },
+//     )),
+//   );
+// }
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
@@ -33,11 +33,9 @@ class MainScreen extends ConsumerWidget {
               index: indexBottomNavbar,
               children: [
                 Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/second');  // Navigate to SecondScreen
-                    },
-                    child: const Text('Launch SecondScreen'),
+                  child:ElevatedButton(
+                  onPressed: () =>  ref.read(goRouterProvider).go('/details'),
+                  child: const Text('Go to the Details screen'),
                   ),
                 ),
                 const HomeScreen(),
