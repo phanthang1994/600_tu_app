@@ -29,34 +29,56 @@ class MainScreen extends ConsumerWidget {
     final indexBottomNavbar = ref.watch(indexBottomNavbarProvider);
     final visible = ref.watch(visibilityProvider);
     return Scaffold(
-            body: IndexedStack(
-              index: indexBottomNavbar,
+            body: Column(
               children: [
-                Center(
-                  child:ElevatedButton(
-                  onPressed: () =>  ref.read(goRouterProvider).go('/details'),
-                  child: const Text('Go to the Details screen'),
+                Expanded(
+                  child: IndexedStack(
+                    index: indexBottomNavbar,
+                    children: [
+                      Center(
+                        child: ElevatedButton(
+                          onPressed: () => ref.read(goRouterProvider).go('/details'),
+                          child: const Text('Go to the Details screen'),
+                        ),
+                      ),
+                      const HomeScreen(),
+                      const Center(
+                        child: Text("Profile"),
+                      ),
+                      const Center(
+                        child: Text("Setting"),
+                      ),
+                    ],
                   ),
                 ),
-                const HomeScreen(),
-                const Center(
-                  child: Text("Profile"),
+                // Bottom Navigation Text
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 1000),
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  height: visible ? kBottomNavigationBarHeight : 0,
+                  child: Wrap(
+                    children: [
+                      buildBottomNavigationBar(ref),
+                    ],
+                  ),
                 ),
-                const Center(
-                  child: Text("Setting"),
+                Center(
+                  child: SizedBox(
+                    height: kBottomNavigationBarHeight,
+                    child: Container(
+                      color: Colors.white,  // Set the background color to black
+                      child: const Center(
+                        child: Text(
+                          "Advertisement",
+                          style: TextStyle(fontSize: kBottomNavigationBarHeight, color: Colors.black), // Adjust font size and text color
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
-          bottomNavigationBar: AnimatedContainer(
-            duration: const Duration(milliseconds: 1000),
-            curve: Curves.fastLinearToSlowEaseIn,
-            height: visible ? kBottomNavigationBarHeight : 0,
-            child: Wrap(
-              children: [
-                buildBottomNavigationBar(ref),
-              ],
-            ),
-          ),
         );
   }
 
