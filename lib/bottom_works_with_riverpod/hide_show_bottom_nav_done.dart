@@ -24,62 +24,77 @@ class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
 
   @override
-  @override
   Widget build(BuildContext context, WidgetRef ref) {
     final indexBottomNavbar = ref.watch(indexBottomNavbarProvider);
     final visible = ref.watch(visibilityProvider);
+
     return Scaffold(
-            body: Column(
-              children: [
-                Expanded(
-                  child: IndexedStack(
-                    index: indexBottomNavbar,
-                    children: [
-                      Center(
-                        child: ElevatedButton(
-                          onPressed: () => ref.read(goRouterProvider).go('/details'),
-                          child: const Text('Go to the Details screen'),
-                        ),
+      body: Stack(
+        children: [
+          // Background Image
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Image.asset(
+              'assets/pictures/home_1.png', // Replace with the path to your image
+              fit: BoxFit.cover,
+            ),
+          ),
+          Column(
+            children: [
+              Expanded(
+                child: IndexedStack(
+                  index: indexBottomNavbar,
+                  children: [
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () => ref.read(goRouterProvider).go('/details'),
+                        child: const Text('Go to the Details screen'),
                       ),
-                      const HomeScreen(),
-                      const Center(
-                        child: Text("Profile"),
-                      ),
-                      const Center(
-                        child: Text("Setting"),
-                      ),
-                    ],
-                  ),
+                    ),
+                    const HomeScreen(),
+                    const Center(
+                      child: Text("Profile"),
+                    ),
+                    const Center(
+                      child: Text("Setting"),
+                    ),
+                  ],
                 ),
-                // Bottom Navigation Text
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 1000),
-                  curve: Curves.fastLinearToSlowEaseIn,
-                  height: visible ? kBottomNavigationBarHeight : 0,
-                  child: Wrap(
-                    children: [
-                      buildBottomNavigationBar(ref),
-                    ],
-                  ),
+              ),
+              // Bottom Navigation Text
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 1000),
+                curve: Curves.fastLinearToSlowEaseIn,
+                height: visible ? kBottomNavigationBarHeight : 0,
+                child: Wrap(
+                  children: [
+                    buildBottomNavigationBar(ref),
+                  ],
                 ),
-                Center(
-                  child: SizedBox(
-                    height: kBottomNavigationBarHeight,
-                    child: Container(
-                      color: Colors.white,  // Set the background color to black
-                      child: const Center(
-                        child: Text(
-                          "Advertisement",
-                          style: TextStyle(fontSize: kBottomNavigationBarHeight, color: Colors.black), // Adjust font size and text color
-                          textAlign: TextAlign.center,
-                        ),
+              ),
+              Center(
+                child: SizedBox(
+                  height: kBottomNavigationBarHeight,
+                  child: Container(
+                    color: Colors.white,
+                    child: const Center(
+                      child: Text(
+                        "Advertisement",
+                        style: TextStyle(fontSize: kBottomNavigationBarHeight, color: Colors.black),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
-        );
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
 }
