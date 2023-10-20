@@ -1,29 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tuvungapp600/provider.dart';
+void main() => runApp(const ProviderScope(child: MyApp()));
 
-import 'Widgets/BottomNav.dart';
-import 'Widgets/ProfileEditWidget.dart';
+/// Flutter code sample for [BottomNavigationBar].
+class MyApp extends ConsumerWidget  {
+  /// Constructs a [MyApp]
+  const MyApp({super.key});
 
-void main() {
-  runApp(
-    const ProviderScope(
-      child: MyApp(),
-    ),
-  );
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'BottomNavbar Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.indigo,
-        ),
-        routes: {
-          '/': (context) => const NavBarHandler(),
-        }
-        );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final goRouter = ref.watch(goRouterProvider);
+    return MaterialApp.router(
+      routerConfig: goRouter,
+    );
   }
 }
