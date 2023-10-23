@@ -11,7 +11,7 @@ const menuItemList = <MenuItem>[
   MenuItem(Icons.shopping_basket, 'Products'),
   MenuItem(Icons.person, 'Me'),
 ];
-
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 final homeKey = GlobalKey<NavigatorState>();
 final productsKey = GlobalKey<NavigatorState>();
 final profileKey = GlobalKey<NavigatorState>();

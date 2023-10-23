@@ -105,7 +105,7 @@ class _HomeScreenState extends ConsumerState<HomeBottomMenuScreen> {
                             );
                           },
                         ),
-                        Text(
+                        const Text(
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 15),
                             "Part 1"),
