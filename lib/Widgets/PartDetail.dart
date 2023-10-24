@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../Constant/constants.dart';
 import 'CounterWidget.dart';
 import 'InforPart.dart';
 import 'SwitchWidget.dart';
@@ -21,6 +22,7 @@ class PartDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(title: Text('Part $index')),
         backgroundColor: Colors.white,
         body: Column(
           children: <Widget>[
@@ -28,7 +30,7 @@ class PartDetail extends StatelessWidget {
                 color: Colors.blue,
                 width: 5 * width,
                 height: height,
-                child: const Text("tors, and hardware for iOS and Android.")),
+                child: const Text("Quảng cáo")),
             Column(
               children: [
                 Padding(

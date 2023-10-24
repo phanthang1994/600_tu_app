@@ -25,7 +25,6 @@ final GoRouter router = GoRouter(
           builder: (BuildContext context, GoRouterState state) {
             if (state.extra is Map<String, dynamic>) {
               Map<String, dynamic> data = state.extra as Map<String, dynamic>;
-              print('DATA $data');  // Use print for debugging instead of log
               return PartDetail(
                 hoanThanh: data['hoanThanh'],
                 width: data['width'],
@@ -34,7 +33,7 @@ final GoRouter router = GoRouter(
               );
             } else {
               // Handle the case where state.extra is not of the expected type
-              return Scaffold(
+              return const Scaffold(
                 body: Center(
                   child: Text('Invalid route data'),
                 ),

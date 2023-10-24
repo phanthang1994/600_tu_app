@@ -29,7 +29,8 @@ class MainScreen extends ConsumerWidget {
     final indexBottomNavbar = ref.watch(indexBottomNavbarProvider);
     final visible = ref.watch(visibilityProvider);
 
-    return Scaffold(
+    return SafeArea(
+        child: Scaffold(
       body: Stack(
         children: [
           // Background Image
@@ -39,7 +40,7 @@ class MainScreen extends ConsumerWidget {
             right: 0,
             bottom: 0,
             child: Image.asset(
-              'assets/pictures/home_1.png', // Replace with the path to your image
+              'assets/pictures/home_1.png',
               fit: BoxFit.cover,
             ),
           ),
@@ -52,7 +53,8 @@ class MainScreen extends ConsumerWidget {
                     const HomeBottomMenuScreen(),
                     Center(
                       child: ElevatedButton(
-                        onPressed: () => ref.read(goRouterProvider).go('/details'),
+                        onPressed: () =>
+                            ref.read(goRouterProvider).go('/details'),
                         child: const Text('Go to the Details screen'),
                       ),
                     ),
@@ -84,7 +86,9 @@ class MainScreen extends ConsumerWidget {
                     child: const Center(
                       child: Text(
                         "Advertisement",
-                        style: TextStyle(fontSize: kBottomNavigationBarHeight, color: Colors.black),
+                        style: TextStyle(
+                            fontSize: kBottomNavigationBarHeight,
+                            color: Colors.black),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -95,9 +99,6 @@ class MainScreen extends ConsumerWidget {
           ),
         ],
       ),
-    );
+    ));
   }
-
 }
-
-
