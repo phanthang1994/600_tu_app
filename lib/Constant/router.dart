@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
@@ -21,13 +23,26 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: 'part_detail',
           builder: (BuildContext context, GoRouterState state) {
-            return PartDetail(
-                index: 1,
-                hoanThanh: 10,
-                width: ref.watch(screenHeightProvider),
-                height: heightScreen);
+            if (state.extra is Map<String, dynamic>) {
+              Map<String, dynamic> data = state.extra as Map<String, dynamic>;
+              print('DATA $data');  // Use print for debugging instead of log
+              return PartDetail(
+                hoanThanh: data['hoanThanh'],
+                width: data['width'],
+                height: data['height'],
+                index: data['index'],
+              );
+            } else {
+              // Handle the case where state.extra is not of the expected type
+              return Scaffold(
+                body: Center(
+                  child: Text('Invalid route data'),
+                ),
+              );
+            }
           },
         ),
+
       ],
     ),
   ],

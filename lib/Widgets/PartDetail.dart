@@ -5,16 +5,16 @@ import 'InforPart.dart';
 import 'SwitchWidget.dart';
 import 'TotalWidget.dart';
 class PartDetail extends StatelessWidget {
+  final int hoanThanh;
   final int index;
-  final double hoanThanh;
   final double height;
   final double width;
   PartDetail(
       {Key? key,
-        required this.index,
         required this.hoanThanh,
         required this.height,
-        required this.width})
+        required this.width,
+        required this.index})
       : super(key: key);
   final ScrollController _firstController = ScrollController();
   @override

@@ -87,8 +87,8 @@ import '../provider.dart';
                   ),
                   Padding(
                       padding: EdgeInsets.only(top: 0.5 * heightScreen),
-                      child: wrapOrFlexible(widthScreen, heightScreen, context)),
-                ],
+                      // child: wrapOrFlexible(widthScreen, heightScreen, ref)),
+                  )],
               ),
             ),
             Positioned(
