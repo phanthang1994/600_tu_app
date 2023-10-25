@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../Widgets/PartDetail.dart';
 import '../Widgets/response_wideget.dart';
 import '../provider.dart';
 class HomeBottomMenuScreen extends ConsumerStatefulWidget  {
@@ -83,14 +82,14 @@ class _HomeScreenState extends ConsumerState<HomeBottomMenuScreen> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: height),
+          padding: const EdgeInsets.only(top: height*2),
           child: ListView(
             controller: scrollController,
             children: [
               InkWell(
                 child: Container(
-                  height: 2 * heightScreen,
-                  color: Colors.red,
+                  height: 1.5 * heightScreen,
+                  color: Colors.white60,
                   child: const Text('Để ảnh tự quảng cáo'),
                 ),
                 onTap: () {
@@ -107,14 +106,14 @@ class _HomeScreenState extends ConsumerState<HomeBottomMenuScreen> {
             top: 0.0,
             child: Container(
                 color: Colors.blue,
-                height: height,
+                height: height*2,
                 width: width,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                      Expanded(
                       child: SizedBox(
-                        height: 200,
+                        // height: 200,
                         child: PageView.builder(
                           controller: pageController,
                           onPageChanged: (index) {
@@ -162,7 +161,7 @@ class _HomeScreenState extends ConsumerState<HomeBottomMenuScreen> {
                       alignment: Alignment.centerRight,
                       child: Container(
                         color: Colors.white,
-                        height: height,
+                        height: height*2,
                         child: IconButton(
                             onPressed: () {
                               Navigator.push(context,
