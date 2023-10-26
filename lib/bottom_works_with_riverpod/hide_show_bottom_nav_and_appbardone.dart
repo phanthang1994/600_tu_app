@@ -22,7 +22,7 @@ import '../provider.dart';
 // }
 
 class MainScreen extends ConsumerWidget {
-  const MainScreen({Key? key});
+  const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'Constant/constants.dart';
 import 'Constant/router.dart';
 import 'Models/nav_models.dart';
+
 final NavbarNotifier navbarNotifier = NavbarNotifier();
 final timerStateProvider = StateProvider.autoDispose<bool>((ref) {
   return false;
@@ -26,3 +27,4 @@ final screenHeightProvider = Provider<double>((ref) {
 final screenWidthProvider = Provider<double>((ref) {
   return (MediaQuery.of(ref.watch(navigatorKey as AlwaysAliveProviderListenable).currentContext).size.width) / 5;
 });
+

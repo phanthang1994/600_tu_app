@@ -57,3 +57,7 @@ String infoPart1 =  "GeeksForGeeks is a good platform to learn programming."
     " It is an educational website."
     "GeeksForGeeks is a good platform to learn programming."
     " It is an educational website.";
+
+const double height = 70;
+
+

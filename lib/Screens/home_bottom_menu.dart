@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../Widgets/icon_btn_with_counter.dart';
+import '../Constant/constants.dart';
 import '../Widgets/response_wideget.dart';
 import '../provider.dart';
 
@@ -69,10 +69,8 @@ class _HomeScreenState extends ConsumerState<HomeBottomMenuScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const double height = 70;
     double heightScreen = (MediaQuery.of(context).size.height - height) / 12;
     double widthScreen = (MediaQuery.of(context).size.width) / 5;
-    double width = (MediaQuery.of(context).size.width);
     return Stack(
       children: <Widget>[
         Container(
@@ -107,54 +105,7 @@ class _HomeScreenState extends ConsumerState<HomeBottomMenuScreen> {
             ],
           ),
         ),
-        Positioned(
-          top: 0.0,
-          child: Container(
-            height: height,
-            width: width,
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: Colors
-                      .grey, // You can replace 'black' with the color you desire
-                  width: 15.0, // The border height in pixels
-                ),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    color: Colors.white,
-                    child: IconBtnWithCounter(
-                      svgSrc: "assets/icons/Bell.svg",
-                      numOfitem: 3,
-                      press: () {
-                        Navigator.push(context, MaterialPageRoute<void>(
-                          builder: (BuildContext context) {
-                            return Scaffold(
-                              appBar: AppBar(
-                                title: const Text('Next page'),
-                              ),
-                              body: const Center(
-                                child: Text(
-                                  'This is the next page',
-                                  style: TextStyle(fontSize: 24),
-                                ),
-                              ),
-                            );
-                          },
-                        ));
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        )
+
       ],
     );
   }

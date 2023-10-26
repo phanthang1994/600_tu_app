@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Constant/constants.dart';
 import '../Screens/home_bottom_menu.dart';
 import '../Screens/second_screen.dart';
+import '../Widgets/icon_btn_with_counter.dart';
 import '../provider.dart';
 
 //https://www.youtube.com/watch?v=FJrtlsMNS-0
@@ -28,74 +29,110 @@ class MainScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final indexBottomNavbar = ref.watch(indexBottomNavbarProvider);
     final visible = ref.watch(visibilityProvider);
-
+    double width = (MediaQuery.of(context).size.width);
     return SafeArea(
         child: Scaffold(
-      body: Stack(
+      body: Column(
         children: [
-          // Background Image
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Image.asset(
-              'assets/pictures/home_1.png',
-              fit: BoxFit.cover,
+          AnimatedContainer(
+            height: visible ? 56.0 : 0.0,
+            duration: const Duration(milliseconds: 200),
+            child: Container(
+              // child: ,
             ),
           ),
-          Column(
-            children: [
-              Expanded(
-                child: IndexedStack(
-                  index: indexBottomNavbar,
-                  children: [
-                    const HomeBottomMenuScreen(),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () =>
-                            ref.read(goRouterProvider).go('/details'),
-                        child: const Text('Go to the Details screen'),
-                      ),
-                    ),
-                    const Center(
-                      child: Text("Profile"),
-                    ),
-                    const Center(
-                      child: Text("Setting"),
-                    ),
-                  ],
+          Container(
+            height: height,
+            width: width,
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.grey, // You can replace 'black' with the color you desire
+                  width: 15.0, // The border height in pixels
                 ),
               ),
-              // Bottom Navigation Text
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 1000),
-                curve: Curves.fastLinearToSlowEaseIn,
-                height: visible ? kBottomNavigationBarHeight : 0,
-                child: Wrap(
-                  children: [
-                    buildBottomNavigationBar(ref),
-                  ],
-                ),
-              ),
-              Center(
-                child: SizedBox(
-                  height: kBottomNavigationBarHeight,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.center,
                   child: Container(
                     color: Colors.white,
-                    child: const Center(
-                      child: Text(
-                        "Advertisement",
-                        style: TextStyle(
-                            fontSize: kBottomNavigationBarHeight,
-                            color: Colors.black),
-                        textAlign: TextAlign.center,
-                      ),
+                    child: IconBtnWithCounter(
+                      svgSrc: "assets/icons/Bell.svg",
+                      numOfitem: 3,
+                      press: () {
+                        Navigator.push(context, MaterialPageRoute<void>(
+                          builder: (BuildContext context) {
+                            return Scaffold(
+                              appBar: AppBar(
+                                title: const Text('Next page'),
+                              ),
+                              body: const Center(
+                                child: Text(
+                                  'This is the next page',
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                              ),
+                            );
+                          },
+                        ));
+                      },
                     ),
                   ),
                 ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: IndexedStack(
+              index: indexBottomNavbar,
+              children: [
+                const HomeBottomMenuScreen(),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () =>
+                        ref.read(goRouterProvider).go('/details'),
+                    child: const Text('Go to the Details screen'),
+                  ),
+                ),
+                const Center(
+                  child: Text("Profile"),
+                ),
+                const Center(
+                  child: Text("Setting"),
+                ),
+              ],
+            ),
+          ),
+          // Bottom Navigation Text
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 1000),
+            curve: Curves.fastLinearToSlowEaseIn,
+            height: visible ? kBottomNavigationBarHeight : 0,
+            child: Wrap(
+              children: [
+                buildBottomNavigationBar(ref),
+              ],
+            ),
+          ),
+          Center(
+            child: SizedBox(
+              height: kBottomNavigationBarHeight,
+              child: Container(
+                color: Colors.white,
+                child: const Center(
+                  child: Text(
+                    "Advertisement",
+                    style: TextStyle(
+                        fontSize: kBottomNavigationBarHeight,
+                        color: Colors.black),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ),
-            ],
+            ),
           ),
         ],
       ),
