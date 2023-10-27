@@ -73,9 +73,6 @@ class _HomeScreenState extends ConsumerState<HomeBottomMenuScreen> {
     double widthScreen = (MediaQuery.of(context).size.width) / 5;
     return Stack(
       children: <Widget>[
-        Container(
-          color: Colors.white,
-        ),
         Positioned.fill(
           child: Image.asset(
             'assets/pictures/home_1.png',
@@ -85,7 +82,7 @@ class _HomeScreenState extends ConsumerState<HomeBottomMenuScreen> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: height),
+          padding: const EdgeInsets.only(top: height/3),
           child: ListView(
             controller: scrollController,
             children: [

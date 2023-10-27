@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../provider.dart';
 
 // import '../../../size_config.dart';
 
-class IconBtnWithCounter extends StatelessWidget {
+class IconBtnWithCounter extends ConsumerWidget {
   const IconBtnWithCounter({
     Key? key,
     required this.svgSrc,
@@ -16,7 +19,8 @@ class IconBtnWithCounter extends StatelessWidget {
   final GestureTapCallback press;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final visible = ref.watch(visibilityProvider);
     return InkWell(
       borderRadius: BorderRadius.circular(100),
       onTap: press,
@@ -33,7 +37,7 @@ class IconBtnWithCounter extends StatelessWidget {
             ),
             child: SvgPicture.asset(svgSrc),
           ),
-          if (numOfitem != 0)
+          if (numOfitem != 0 && visible)
             Positioned(
               top: -3,
               right: 0,
@@ -48,7 +52,7 @@ class IconBtnWithCounter extends StatelessWidget {
                 child: Center(
                   child: Text(
                     "$numOfitem",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize:10,
                       height: 1,
                       fontWeight: FontWeight.w600,

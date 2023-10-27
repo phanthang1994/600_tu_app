@@ -37,12 +37,32 @@ class MainScreen extends ConsumerWidget {
           AnimatedContainer(
             height: visible ? 56.0 : 0.0,
             duration: const Duration(milliseconds: 200),
-            child: Container(
-              // child: ,
-            ),
+            child: SizedBox(
+              child: IconBtnWithCounter(
+                svgSrc: "assets/icons/Bell.svg",
+                numOfitem: 3,
+                press: () {
+                  Navigator.push(context, MaterialPageRoute<void>(
+                    builder: (BuildContext context) {
+                      return Scaffold(
+                        appBar: AppBar(
+                          title: const Text('Next page'),
+                        ),
+                        body: const Center(
+                          child: Text(
+                            'This is the next page',
+                            style: TextStyle(fontSize: 24),
+                          ),
+                        ),
+                      );
+                    },
+                  ));
+                },
+              ),
+            )
           ),
           Container(
-            height: height,
+            // height: height,
             width: width,
             decoration: const BoxDecoration(
               border: Border(
@@ -52,37 +72,31 @@ class MainScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    color: Colors.white,
-                    child: IconBtnWithCounter(
-                      svgSrc: "assets/icons/Bell.svg",
-                      numOfitem: 3,
-                      press: () {
-                        Navigator.push(context, MaterialPageRoute<void>(
-                          builder: (BuildContext context) {
-                            return Scaffold(
-                              appBar: AppBar(
-                                title: const Text('Next page'),
-                              ),
-                              body: const Center(
-                                child: Text(
-                                  'This is the next page',
-                                  style: TextStyle(fontSize: 24),
-                                ),
-                              ),
-                            );
-                          },
-                        ));
-                      },
+            child:Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: ListTile(
+                onTap: () {},
+                selected: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(16.0),
+                  ),
+                ),
+                selectedTileColor: Colors.indigoAccent.shade100,
+                title: Text(
+                  "Welcome Back",
+                  style: Theme.of(context).textTheme.subtitle1!.merge(
+                    const TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 18.0,
                     ),
                   ),
                 ),
-              ],
+                subtitle: Text(
+                  "A Greet welcome to you all.",
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+              ),
             ),
           ),
           Expanded(
