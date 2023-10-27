@@ -37,29 +37,42 @@ class MainScreen extends ConsumerWidget {
           AnimatedContainer(
             height: visible ? 56.0 : 0.0,
             duration: const Duration(milliseconds: 200),
-            child: SizedBox(
-              child: IconBtnWithCounter(
-                svgSrc: "assets/icons/Bell.svg",
-                numOfitem: 3,
-                press: () {
-                  Navigator.push(context, MaterialPageRoute<void>(
-                    builder: (BuildContext context) {
-                      return Scaffold(
-                        appBar: AppBar(
-                          title: const Text('Next page'),
-                        ),
-                        body: const Center(
-                          child: Text(
-                            'This is the next page',
-                            style: TextStyle(fontSize: 24),
-                          ),
-                        ),
-                      );
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Align(
+                  alignment: Alignment.center, // Center the child to the right
+                  child: Text(
+                    '600 Tu Vựng Toeic',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(top: 12.0), // Add top padding of 12
+                  child: IconBtnWithCounter(
+                    svgSrc: "assets/icons/Bell.svg",
+                    numOfitem: 3,
+                    press: () {
+                      Navigator.push(context, MaterialPageRoute<void>(
+                        builder: (BuildContext context) {
+                          return Scaffold(
+                            appBar: AppBar(
+                              title: Text('Next page'),
+                            ),
+                            body: Center(
+                              child: Text(
+                                'This is the next page',
+                                style: TextStyle(fontSize: 24),
+                              ),
+                            ),
+                          );
+                        },
+                      ));
                     },
-                  ));
-                },
-              ),
-            )
+                  ),
+                ),
+              ],
+            ),
           ),
           Container(
             // height: height,
