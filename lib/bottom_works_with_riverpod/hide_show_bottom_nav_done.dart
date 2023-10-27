@@ -84,8 +84,8 @@ class MainScreen extends ConsumerWidget {
                 ),
                 selectedTileColor: Colors.indigoAccent.shade100,
                 title: Text(
-                  "Welcome Back",
-                  style: Theme.of(context).textTheme.subtitle1!.merge(
+                  "ADs",
+                  style: Theme.of(context).textTheme.titleMedium!.merge(
                     const TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 18.0,
@@ -94,7 +94,7 @@ class MainScreen extends ConsumerWidget {
                 ),
                 subtitle: Text(
                   "A Greet welcome to you all.",
-                  style: Theme.of(context).textTheme.subtitle2,
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
               ),
             ),
