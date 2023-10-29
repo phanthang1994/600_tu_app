@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../Constant/constants.dart';
 import '../Screens/home_bottom_menu.dart';
-import '../Screens/second_screen.dart';
+// import '../Screens/second_screen.dart';
 import '../Widgets/icon_btn_with_counter.dart';
 import '../provider.dart';
 
@@ -40,40 +40,49 @@ class MainScreen extends ConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Align(
-                  alignment: Alignment.center, // Center the child to the right
-                  child: Text(
-                    '600 Tu Vựng Toeic',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
                 Container(
-                  padding: const EdgeInsets.only(top: 12.0), // Add top padding of 12
-                  child: IconBtnWithCounter(
-                    svgSrc: "assets/icons/Bell.svg",
-                    numOfitem: 3,
-                    press: () {
-                      Navigator.push(context, MaterialPageRoute<void>(
-                        builder: (BuildContext context) {
-                          return Scaffold(
-                            appBar: AppBar(
-                              title: Text('Next page'),
-                            ),
-                            body: Center(
-                              child: Text(
-                                'This is the next page',
-                                style: TextStyle(fontSize: 24),
-                              ),
-                            ),
-                          );
-                        },
-                      ));
-                    },
+                  margin: const EdgeInsets.only(left: 10.0), // Set margin on the left side
+                  child: const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      '600 Tu Vựng Toeic',
+                      style: TextStyle(fontSize: 16),
+                    ),
                   ),
                 ),
+
+                Container(
+                  margin: const EdgeInsets.only(right: 10.0), // Set margin on the right side
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: IconBtnWithCounter(
+                      svgSrc: "assets/icons/Bell.svg",
+                      numOfitem: 3,
+                      press: () {
+                        Navigator.push(context, MaterialPageRoute<void>(
+                          builder: (BuildContext context) {
+                            return Scaffold(
+                              appBar: AppBar(
+                                title: const Text('Next page'),
+                              ),
+                              body: const Center(
+                                child: Text(
+                                  'This is the next page',
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                              ),
+                            );
+                          },
+                        ));
+                      },
+                    ),
+                  ),
+                ),
+
               ],
             ),
           ),
+
           Container(
             // height: height,
             width: width,
@@ -81,12 +90,12 @@ class MainScreen extends ConsumerWidget {
               border: Border(
                 bottom: BorderSide(
                   color: Colors.grey, // You can replace 'black' with the color you desire
-                  width: 15.0, // The border height in pixels
+                  width: 6.0, // The border height in pixels
                 ),
               ),
             ),
             child:Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: const EdgeInsets.fromLTRB(5, 8, 5, 6),
               child: ListTile(
                 onTap: () {},
                 selected: true,
