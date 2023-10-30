@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Constant/constants.dart';
 import '../Widgets/response_wideget.dart';
 import '../provider.dart';
+import '../slide_quang_cao/main.dart';
 
 class HomeBottomMenuScreen extends ConsumerStatefulWidget {
   const HomeBottomMenuScreen({
@@ -86,19 +87,72 @@ class _HomeScreenState extends ConsumerState<HomeBottomMenuScreen> {
           child: ListView(
             controller: scrollController,
             children: [
-              InkWell(
-                child: Container(
-                  height: 1.5 * heightScreen,
-                  color: Colors.white60,
-                  child: const Text('Để ảnh tự quảng cáo'),
+              SizedBox(
+                height: 200,
+                child: PageView.builder(
+                  controller: pageController,
+                  onPageChanged: (index) {
+                    pageNo = index;
+                    setState(() {});
+                  },
+                  itemBuilder: (_, index) {
+                    return AnimatedBuilder(
+                      animation: pageController,
+                      builder: (ctx, child) {
+                        return child!;
+                      },
+                      child: GestureDetector(
+                        onTap: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content:
+                              Text("Hello you tapped at ${index + 1} "),
+                            ),
+                          );
+                        },
+                        onPanDown: (d) {
+                          carasouelTmer?.cancel();
+                          carasouelTmer = null;
+                        },
+                        onPanCancel: () {
+                          carasouelTmer = getTimer();
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                              right: 8, left: 8, top: 24, bottom: 12),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(24.0),
+                            color: Colors.amberAccent,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  itemCount: 5,
                 ),
-                onTap: () {
-                  debugPrint("tapped on first");
-                },
               ),
-              Padding(
-                  padding: EdgeInsets.only(top: 0.5 * heightScreen),
-                  child: wrapOrFlexible(1, 10, widthScreen, heightScreen, ref)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  4,
+                      (index) => GestureDetector(
+                    child: Container(
+                      margin: const EdgeInsets.all(2.0),
+                      child: Icon(
+                        Icons.circle,
+                        size: 12.0,
+                        color: pageNo == index
+                            ? Colors.indigoAccent
+                            : Colors.grey.shade300,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: GridB(),
+              )
             ],
           ),
         ),

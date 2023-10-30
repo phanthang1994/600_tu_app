@@ -86,7 +86,19 @@ class MainScreen extends ConsumerWidget {
           Container(
             // height: height,
             width: width,
-            decoration: const BoxDecoration(
+            decoration: visible ? const BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  color: Colors.grey, // You can replace 'black' with the color you desire
+                  width: 5.0, // The border height in pixels
+                ) ,
+                bottom: BorderSide(
+                  color: Colors.grey, // You can replace 'black' with the color you desire
+                  width: 6.0,
+                  // The border height in pixels
+                ),
+              ),
+            ) : const BoxDecoration(
               border: Border(
                 bottom: BorderSide(
                   color: Colors.grey, // You can replace 'black' with the color you desire
