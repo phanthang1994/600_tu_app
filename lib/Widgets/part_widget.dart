@@ -121,10 +121,12 @@ class ListVIewPart extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: buildMap.length,
-      itemExtent: 8.0,
       itemBuilder: (_, index) {
         // Add vertical spacing between items
-        return buildMap.elementAt(index);
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0), // Adjust the value as needed
+          child: buildMap.elementAt(index),
+        );
       },
     );
   }
