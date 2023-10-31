@@ -6,16 +6,15 @@ import 'InforPart.dart';
 import 'SwitchWidget.dart';
 import 'TotalWidget.dart';
 class PartDetail extends StatelessWidget {
-  final int completedQuestions;
   final int index;
   PartDetail(
       {Key? key,
-        required this.completedQuestions,
         required this.index})
       : super(key: key);
   final ScrollController _firstController = ScrollController();
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: Text('Part $index')),
@@ -24,6 +23,7 @@ class PartDetail extends StatelessWidget {
           children: <Widget>[
             Container(
                 color: Colors.blue,
+                width: width,
                 height: height,
                 child: const Text("Quảng cáo")),
             Column(
@@ -46,7 +46,7 @@ class PartDetail extends StatelessWidget {
                                   fontWeight: FontWeight.bold, fontSize: 15),
                               'Số câu đã làm'),
                           const Text('Trả lời đúng'),
-                          Text('Hoàn thành: $completedQuestions %'),
+                          Text('Hoàn thành:  %'),
                         ],
                       )
                     ],
@@ -55,7 +55,7 @@ class PartDetail extends StatelessWidget {
                 Center(
                   child: Container(
                     // height should be fixed for vertical scrolling
-                    height: 3.5 * height,
+                    height: 2.5 * height,
                     margin: const EdgeInsets.only(left: 5),
                     decoration: BoxDecoration(
                       // adding borders around the widget
@@ -92,7 +92,8 @@ class PartDetail extends StatelessWidget {
                             padding: EdgeInsets.only(bottom: 20),
                             child: Text('Số câu hỏi')),
                         SizedBox(
-                          height: 2 * height,
+                          width: 0.2*width,
+                          height:  2*height,
                           child: ListView.builder(
                             itemCount: 20,
                             itemBuilder: (context, position) {

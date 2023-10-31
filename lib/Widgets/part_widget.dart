@@ -1,30 +1,44 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../Constant/constants.dart';
+import '../provider.dart';
 
 class ListVIewPart extends StatelessWidget {
   ListVIewPart({Key? key}) : super(key: key);
   final List<Widget> buildMap = [
-    const Text(
+    Container(
+      decoration: const BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.red,
+            width: 5,
+          ),
+        ),
+      ),
+      child: const Text(
+        "Nghe Hiểu",
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-        "Nghe Hiểu"),
+      ),
+    ),
+
     Row(
       children: [
-        Expanded(child: Container(
+        Flexible(child: Container(
           margin: const EdgeInsets.only(right: 8.0),
-          child: const PartInformation(index: 0),
+          child: const PartInformation(index: 0,),
         )),
-        const Expanded(child: PartInformation(index: 1))
+        const Expanded(child: PartInformation(index: 1, ))
       ],
     ),
     Row(
       children: [
         Expanded(child: Container(
           margin: const EdgeInsets.only(right: 8.0),
-          child: const PartInformation(index: 0),
+          child: const PartInformation(index: 2, ),
         )),
-        const Expanded(child: PartInformation(index: 3))
+        const Expanded(child: PartInformation(index: 3, ))
       ],
     ),
     Padding(
@@ -47,21 +61,32 @@ class ListVIewPart extends StatelessWidget {
         ),
       ),
     ),
-    const Text(
+    Container(
+      decoration: const BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.red,
+            width: 5,
+          ),
+        ),
+      ),
+      child: const Text(
+        "Đọc Hiểu",
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-        "Đọ Hiểu"),
+      ),
+    ),
     Row(
       children: [
         Expanded(child: Container(
           margin: const EdgeInsets.only(right: 8.0),
-          child: const PartInformation(index: 0),
+          child: const PartInformation(index: 4, ),
         )),
-        const Expanded(child: PartInformation(index: 5))
+        const Expanded(child: PartInformation(index: 5, ))
       ],
     ),
     const Row(
       children: [
-        Expanded(child: PartInformation(index: 6)),
+        Expanded(child: PartInformation(index: 6, )),
         Spacer()
       ],
     ),
@@ -86,34 +111,46 @@ class ListVIewPart extends StatelessWidget {
       ),
     ),
 
-    const Text(
+    Container(
+      decoration: const BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.red,
+            width: 5,
+          ),
+        ),
+      ),
+      child: const Text(
+        "Luyện Tập",
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-        "Luyện Tập"),
+      ),
+    ),
 
     Row(
       children: [
         Expanded(child: Container(
           margin: const EdgeInsets.only(right: 8.0),
-          child: const PartInformation(index: 0),
+          child: const PartInformation(index: 7, ),
         )),
-        const Expanded(child: PartInformation(index: 1))
+        const Expanded(child: PartInformation(index: 8, ))
       ],
     ),
     Row(
       children: [
         Expanded(child: Container(
           margin: const EdgeInsets.only(right: 8.0),
-          child: const PartInformation(index: 0),
+          child: const PartInformation(index: 9, ),
         )),
-        const Expanded(child: PartInformation(index: 3))
+        const Expanded(child: PartInformation(index: 10, ))
       ],
     ),
     const Row(
       children: [
-        Expanded(child: PartInformation(index: 6)),
+        Expanded(child: PartInformation(index: 11, )),
         Spacer()
       ],
     ),
+    const SizedBox(height: 10,)
   ];
   @override
   Widget build(BuildContext context) {
@@ -133,11 +170,11 @@ class ListVIewPart extends StatelessWidget {
 
 }
 
-class PartInformation extends StatelessWidget {
+class PartInformation extends ConsumerWidget {
   const PartInformation({Key? key, required this.index}) : super(key: key);
   final int index;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
@@ -148,16 +185,24 @@ class PartInformation extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(16.0),
-              topRight: Radius.circular(16.0),
-            ),
-            child: Image.network(
-              "${gridMap.elementAt(index)['images']}",
-              height: 170,
-              width: double.infinity,
-              fit: BoxFit.cover,
+          GestureDetector(
+            onTap: () {
+              Map<String, dynamic> data = {
+                'index': index,
+              };
+              ref.read(goRouterProvider).push('/part_detail', extra: data);
+            },
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(16.0),
+                topRight: Radius.circular(16.0),
+              ),
+              child: Image.network(
+                "${gridMap.elementAt(index)['images']}",
+                height: 170,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Padding(
@@ -166,7 +211,7 @@ class PartInformation extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${gridMap.elementAt(index)['title']}",
+                  "${gridMap.elementAt(index)['PartNumber']}",
                   style: Theme.of(context).textTheme.titleMedium!.merge(
                     const TextStyle(
                       fontWeight: FontWeight.w700,
@@ -177,7 +222,7 @@ class PartInformation extends StatelessWidget {
                   height: 8.0,
                 ),
                 Text(
-                  "${gridMap.elementAt(index)['price']}",
+                  "${gridMap.elementAt(index)['Description']}",
                   style: Theme.of(context).textTheme.titleSmall!.merge(
                     TextStyle(
                       fontWeight: FontWeight.w700,

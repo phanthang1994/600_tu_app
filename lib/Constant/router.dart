@@ -26,7 +26,6 @@ final GoRouter router = GoRouter(
             if (state.extra is Map<String, dynamic>) {
               Map<String, dynamic> data = state.extra as Map<String, dynamic>;
               return PartDetail(
-                completedQuestions: data['hoanThanh'],
                 index: data['index'],
               );
             } else {

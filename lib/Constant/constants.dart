@@ -62,45 +62,75 @@ const double height = 70;
 
 final List<Map<String, dynamic>> gridMap = [
   {
-    "title": "white sneaker with adidas logo",
-    "price": "\$255",
+    "PartNumber": "Part 1",
+    "Description": "Mô tả tranh",
     "images":
     "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=725&q=80",
   },
   {
-    "title": "Black Jeans with blue stripes",
-    "price": "\$245",
+    "PartNumber": "Part 2",
+    "Description": "Hỏi & Đáp",
     "images":
     "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
   },
   {
-    "title": "Red shoes with black stripes",
-    "price": "\$155",
+    "PartNumber": "Part 3",
+    "Description": "Hội Thoại Ngắn",
     "images":
     "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hvZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
   },
   {
-    "title": "Gamma shoes with beta brand.",
-    "price": "\$275",
+    "PartNumber": "Part 4",
+    "Description": "Bài Nói Ngắn",
     "images":
     "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
   },
   {
-    "title": "Alpha t-shirt for alpha testers.",
-    "price": "\$25",
+    "PartNumber": "Part 5",
+    "Description": "Điền Vào Câu",
     "images":
     "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
   },
   {
-    "title": "Beta jeans for beta testers",
-    "price": "\$27",
+    "PartNumber": "Part 6",
+    "Description": "Điền Vào Đoạn Văn",
     "images":
     "https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
   },
   {
-    "title": "V&V  model white t shirts.",
-    "price": "\$55",
+    "PartNumber": "Part 7",
+    "Description": "Đọc Hiểu ĐOạn Văn",
     "images":
     "https://images.unsplash.com/photo-1554568218-0f1715e72254?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-  }
+  },
+  {
+    "PartNumber": "Test Thử",
+    "Description": "Điểm Ngay",
+    "images":
+    "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=725&q=80",
+  },
+  {
+    "PartNumber": "Mẹo Hay",
+    "Description": "Các Part",
+    "images":
+    "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+  },
+  {
+    "PartNumber": "Từ Vựng",
+    "Description": "Chế Tác",
+    "images":
+    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hvZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+  },
+  {
+    "PartNumber": "Ngữ Pháp",
+    "Description": "Căn Bản",
+    "images":
+    "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+  },
+  {
+    "PartNumber": "Điểm Cao",
+    "Description": "Lộ Trình",
+    "images":
+    "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+  },
 ];
