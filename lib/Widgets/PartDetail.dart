@@ -6,15 +6,11 @@ import 'InforPart.dart';
 import 'SwitchWidget.dart';
 import 'TotalWidget.dart';
 class PartDetail extends StatelessWidget {
-  final int hoanThanh;
+  final int completedQuestions;
   final int index;
-  final double height;
-  final double width;
   PartDetail(
       {Key? key,
-        required this.hoanThanh,
-        required this.height,
-        required this.width,
+        required this.completedQuestions,
         required this.index})
       : super(key: key);
   final ScrollController _firstController = ScrollController();
@@ -28,7 +24,6 @@ class PartDetail extends StatelessWidget {
           children: <Widget>[
             Container(
                 color: Colors.blue,
-                width: 5 * width,
                 height: height,
                 child: const Text("Quảng cáo")),
             Column(
@@ -51,7 +46,7 @@ class PartDetail extends StatelessWidget {
                                   fontWeight: FontWeight.bold, fontSize: 15),
                               'Số câu đã làm'),
                           const Text('Trả lời đúng'),
-                          Text('Hoàn thành: $hoanThanh %'),
+                          Text('Hoàn thành: $completedQuestions %'),
                         ],
                       )
                     ],
@@ -97,7 +92,6 @@ class PartDetail extends StatelessWidget {
                             padding: EdgeInsets.only(bottom: 20),
                             child: Text('Số câu hỏi')),
                         SizedBox(
-                          width: width,
                           height: 2 * height,
                           child: ListView.builder(
                             itemCount: 20,
