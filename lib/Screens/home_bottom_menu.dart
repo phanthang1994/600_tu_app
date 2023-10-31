@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../Constant/constants.dart';
 // import '../Widgets/response_wideget.dart';
+import '../Widgets/part_widget.dart';
 import '../provider.dart';
 import '../slide_quang_cao/main.dart';
 
@@ -149,9 +150,9 @@ class _HomeScreenState extends ConsumerState<HomeBottomMenuScreen> {
                   ),
                 ),
               ),
-              const Padding(
+              Padding(
                   padding: EdgeInsets.all(10),
-                  child: GridB(),
+                  child: ListVIewPart(),
               )
             ],
           ),
