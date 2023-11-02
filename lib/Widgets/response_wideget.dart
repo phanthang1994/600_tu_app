@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'PartDetail.dart';
-Widget wrapOrFlexible(double widthScreen, double heightScreen, BuildContext context) {
+import '../provider.dart';
+Widget wrapOrFlexible(int index, double hoanThanh, double widthScreen, double heightScreen, ref) {
   Widget a = const Column();
   if (widthScreen <= 60.0) {
     a = Column(
@@ -52,17 +52,13 @@ Widget wrapOrFlexible(double widthScreen, double heightScreen, BuildContext cont
                         ),
                         onTap: () {
                           debugPrint("tapped on first");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) {
-                              // do something
-                              return PartDetail(
-                                  index: 1,
-                                  hoanThanh: 10,
-                                  width: widthScreen,
-                                  height: heightScreen);
-                            }),
-                          );
+                          Map<String, dynamic> data = {
+                            'hoanThanh': 10,
+                            'width': widthScreen,
+                            'height': heightScreen,
+                            'index': 1,
+                          };
+                          ref.read(goRouterProvider).push('/part_detail', extra: data);
                         },
                       ),
                       const Text(
@@ -262,17 +258,14 @@ Widget wrapOrFlexible(double widthScreen, double heightScreen, BuildContext cont
                         ),
                         onTap: () {
                           debugPrint("tapped on first");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) {
-                              // do something
-                              return PartDetail(
-                                  index: 1,
-                                  hoanThanh: 10,
-                                  width: widthScreen,
-                                  height: heightScreen);
-                            }),
-                          );
+                          Map<String, dynamic> data = {
+                            'hoanThanh': 10,
+                            'width': widthScreen,
+                            'height': heightScreen,
+                            'index': 1,
+                          };
+                          ref.read(goRouterProvider).push('/part_detail', extra: data);
+
                         },
                       ),
                       const Text(
@@ -426,17 +419,13 @@ Widget wrapOrFlexible(double widthScreen, double heightScreen, BuildContext cont
                         ),
                         onTap: () {
                           debugPrint("tapped on first");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) {
-                              // do something
-                              return PartDetail(
-                                  index: 1,
-                                  hoanThanh: 10,
-                                  width: widthScreen,
-                                  height: heightScreen);
-                            }),
-                          );
+                          Map<String, dynamic> data = {
+                            'hoanThanh': 10,
+                            'width': widthScreen,
+                            'height': heightScreen,
+                            'index': 1,
+                          };
+                          ref.read(goRouterProvider).push('/part_detail', extra: data);
                         },
                       ),
                       const Text('Test Thử'),
@@ -671,17 +660,14 @@ Widget wrapOrFlexible(double widthScreen, double heightScreen, BuildContext cont
                       ),
                       onTap: () {
                         debugPrint("tapped on first");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) {
-                            // do something
-                            return PartDetail(
-                                index: 1,
-                                hoanThanh: 10,
-                                width: widthScreen,
-                                height: heightScreen);
-                          }),
-                        );
+                        Map<String, dynamic> data = {
+                          'hoanThanh': 10,
+                          'width': widthScreen,
+                          'height': heightScreen,
+                          'index': 1,
+                        };
+                        ref.read(goRouterProvider).push('/part_detail', extra: data);
+
                       },
                     ),
                     const Text(
@@ -869,17 +855,13 @@ Widget wrapOrFlexible(double widthScreen, double heightScreen, BuildContext cont
                       ),
                       onTap: () {
                         debugPrint("tapped on first");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) {
-                            // do something
-                            return PartDetail(
-                                index: 1,
-                                hoanThanh: 10,
-                                width: widthScreen,
-                                height: heightScreen);
-                          }),
-                        );
+                        Map<String, dynamic> data = {
+                          'hoanThanh': 10,
+                          'width': widthScreen,
+                          'height': heightScreen,
+                          'index': 1,
+                        };
+                        ref.read(goRouterProvider).push('/part_detail', extra: data);
                       },
                     ),
                     const Text(
@@ -1024,17 +1006,13 @@ Widget wrapOrFlexible(double widthScreen, double heightScreen, BuildContext cont
                       ),
                       onTap: () {
                         debugPrint("tapped on first");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) {
-                            // do something
-                            return PartDetail(
-                                index: 1,
-                                hoanThanh: 10,
-                                width: widthScreen,
-                                height: heightScreen);
-                          }),
-                        );
+                        Map<String, dynamic> data = {
+                          'hoanThanh': 10,
+                          'width': widthScreen,
+                          'height': heightScreen,
+                          'index': 1,
+                        };
+                        ref.read(goRouterProvider).push('/part_detail', extra: data);
                       },
                     ),
                     const Text('Test Thử'),

@@ -1,34 +1,31 @@
 import 'package:flutter/material.dart';
 
+import '../Constant/constants.dart';
 import 'CounterWidget.dart';
 import 'InforPart.dart';
 import 'SwitchWidget.dart';
 import 'TotalWidget.dart';
 class PartDetail extends StatelessWidget {
   final int index;
-  final double hoanThanh;
-  final double height;
-  final double width;
   PartDetail(
       {Key? key,
-        required this.index,
-        required this.hoanThanh,
-        required this.height,
-        required this.width})
+        required this.index})
       : super(key: key);
   final ScrollController _firstController = ScrollController();
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(title: Text('Part $index')),
         backgroundColor: Colors.white,
         body: Column(
           children: <Widget>[
             Container(
                 color: Colors.blue,
-                width: 5 * width,
+                width: width,
                 height: height,
-                child: const Text("tors, and hardware for iOS and Android.")),
+                child: const Text("Quảng cáo")),
             Column(
               children: [
                 Padding(
@@ -49,7 +46,7 @@ class PartDetail extends StatelessWidget {
                                   fontWeight: FontWeight.bold, fontSize: 15),
                               'Số câu đã làm'),
                           const Text('Trả lời đúng'),
-                          Text('Hoàn thành: $hoanThanh %'),
+                          Text('Hoàn thành:  %'),
                         ],
                       )
                     ],
@@ -58,7 +55,7 @@ class PartDetail extends StatelessWidget {
                 Center(
                   child: Container(
                     // height should be fixed for vertical scrolling
-                    height: 3.5 * height,
+                    height: 2.5 * height,
                     margin: const EdgeInsets.only(left: 5),
                     decoration: BoxDecoration(
                       // adding borders around the widget
@@ -95,8 +92,8 @@ class PartDetail extends StatelessWidget {
                             padding: EdgeInsets.only(bottom: 20),
                             child: Text('Số câu hỏi')),
                         SizedBox(
-                          width: width,
-                          height: 2 * height,
+                          width: 0.2*width,
+                          height:  2*height,
                           child: ListView.builder(
                             itemCount: 20,
                             itemBuilder: (context, position) {
