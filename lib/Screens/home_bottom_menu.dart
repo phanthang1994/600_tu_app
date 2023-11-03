@@ -5,10 +5,9 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../Constant/constants.dart';
-// import '../Widgets/response_wideget.dart';
-import '../Widgets/part_widget.dart';
+import '../Widgets/list_view_part.dart';
 import '../provider.dart';
-import '../slide_quang_cao/main.dart';
+
 
 class HomeBottomMenuScreen extends ConsumerStatefulWidget {
   const HomeBottomMenuScreen({
@@ -71,8 +70,6 @@ class _HomeScreenState extends ConsumerState<HomeBottomMenuScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double heightScreen = (MediaQuery.of(context).size.height - height) / 12;
-    double widthScreen = (MediaQuery.of(context).size.width) / 5;
     return Stack(
       children: <Widget>[
         Positioned.fill(
