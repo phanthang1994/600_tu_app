@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../Constant/constants.dart';
+import '../provider.dart';
 import 'CounterWidget.dart';
 import 'InforPart.dart';
 import 'SwitchWidget.dart';
@@ -113,18 +115,25 @@ class PartDetail extends StatelessWidget {
                 ),
                 Container(
                   margin: const EdgeInsets.all(25),
-                  child: TextButton(
-                    child: const Text(
-                      'Bắt đầu nào',
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          // do something
-                          return const Text('Các Câu hỏi test 1');
-                        }),
+                  child:Consumer(
+                    // 2. specify the builder and obtain a WidgetRef
+                    builder: (_, WidgetRef ref, __) {
+                      return  GestureDetector(
+                        onTap: () {
+                          Map<String, dynamic> data = {
+                            'index': index,
+                          };
+                          //B1 fecth API
+                          //B2 navigate đến màn hình của câu hỏi đầu tiên
+                          ref.read(goRouterProvider).push('/test_detail_listening', extra: data);
+                        },
+                        child: const ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(16.0),
+                            topRight: Radius.circular(16.0),
+                          ),
+                          child: Text('Bắt Đầu Nào'),
+                        ),
                       );
                     },
                   ),
