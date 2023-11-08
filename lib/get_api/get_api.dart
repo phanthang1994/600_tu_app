@@ -32,6 +32,7 @@ class Activity {
 final activityProvider = FutureProvider<Activity>((ref) async {
   final response = await http.get(Uri.https('www.boredapi.com', '/api/activity')); // Corrected the URL
   final json = jsonDecode(response.body) as Map<String, dynamic>;
+  print(json);
   return Activity.fromJson(json);
 });
 
