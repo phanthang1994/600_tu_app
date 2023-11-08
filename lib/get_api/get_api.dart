@@ -42,7 +42,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Activity Example'),
+        title: const Text('Activity Example'),
       ),
       body: Center(
         child: Consumer(
@@ -59,7 +59,7 @@ class Home extends StatelessWidget {
                   Text('Price: ${data.price}'),
                 ],
               ),
-              loading: () => CircularProgressIndicator(),
+              loading: () => const CircularProgressIndicator(),
               error: (error, stackTrace) => Text('Error: $error'),
             );
           },
@@ -71,7 +71,7 @@ class Home extends StatelessWidget {
 
 void main() {
   runApp(
-    ProviderScope(
+    const ProviderScope(
       child: MaterialApp(
         home: Home(),
       ),
