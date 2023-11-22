@@ -1,65 +1,81 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+//https://riverpod.dev/docs/essentials/first_request
+class Activity {
+  Activity({
+    required this.key,
+    required this.activity,
+    required this.type,
+    required this.participants,
+    required this.price,
+  });
 
-void main() {
-  runApp(ProviderScope(child: MyApp()));
-}
-
-// Function to fetch albums data
-Future<List<dynamic>> fetchAlbums() async {
-  final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/albums'));
-
-  if (response.statusCode == 200) {
-    // If server returns an OK response, parse the JSON
-    return json.decode(response.body);
-  } else {
-    // If the server did not return a 200 OK response,
-    // throw an exception.
-    throw Exception('Failed to load albums');
+  factory Activity.fromJson(Map<String, dynamic> json) {
+    return Activity(
+      key: json['key'] as String,
+      activity: json['activity'] as String,
+      type: json['type'] as String,
+      participants: json['participants'] as int,
+      price: json['price'] as double,
+    );
   }
+
+  final String key;
+  final String activity;
+  final String type;
+  final int participants;
+  final double price;
 }
 
-// Riverpod provider for albums
-final albumsProvider = FutureProvider<List<dynamic>>((ref) async {
-  return fetchAlbums();
+final activityProvider = FutureProvider<Activity>((ref) async {
+  final response = await http.get(Uri.https('www.boredapi.com', '/api/activity')); // Corrected the URL
+  final json = jsonDecode(response.body) as Map<String, dynamic>;
+  print(json);
+  return Activity.fromJson(json);
 });
 
-// MyApp widget
-class MyApp extends StatelessWidget {
+class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key); // Corrected the constructor syntax.
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Riverpod HTTP Example'),
-        ),
-        body: Center(
-          child: Consumer(
-            builder: (context, WidgetRef ref, child) {
-              // AsyncValue handles loading and error states
-              final albumsAsyncValue = ref.watch(albumsProvider);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Activity Example'),
+      ),
+      body: Center(
+        child: Consumer(
+          builder: (context, ref, child) {
+            final AsyncValue<Activity> activity = ref.watch(activityProvider);
 
-              return albumsAsyncValue.when(
-                loading: () => CircularProgressIndicator(),
-                error: (error, stackTrace) => Text('Error: $error'),
-                data: (albums) {
-                  // Display the fetched data
-                  return ListView.builder(
-                    itemCount: albums.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(albums[index]['title']),
-                      );
-                    },
-                  );
-                },
-              );
-            },
-          ),
+            return activity.when(
+              data: (data) => Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Activity: ${data.activity}'),
+                  Text('Type: ${data.type}'),
+                  Text('Participants: ${data.participants}'),
+                  Text('Price: ${data.price}'),
+                ],
+              ),
+              loading: () => const CircularProgressIndicator(),
+              error: (error, stackTrace) => Text('Error: $error'),
+            );
+          },
         ),
       ),
     );
   }
+}
+
+void main() {
+  runApp(
+    const ProviderScope(
+      child: MaterialApp(
+        home: Home(),
+      ),
+    ),
+  );
 }
